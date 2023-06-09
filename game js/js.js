@@ -190,7 +190,7 @@ function gameOver() {
 
 function spawnPlayer() {
     player = document.createElement('img');
-    player.src = 'path/to/player/main.png';
+    player.src = '/Pictures/main.png';
     player.classList.add('player');
     player.style.left = playerX + 'px';
     player.style.bottom = playerY + 'px';
