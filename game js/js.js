@@ -149,15 +149,15 @@ function collision(a, b) {
 
 function spawnObstacle() {
     if (Math.random() < 0.02) {
-      let obstacle = document.createElement('img');
-      obstacle.src = 'path/to/obstacle/npc.avif';
-      obstacle.classList.add('obstacle');
-      obstacle.style.left = Math.random() * (gameContainer.offsetWidth - obstacle.offsetWidth) + 'px';
-      obstacle.style.top = '-50px';
-      gameContainer.appendChild(obstacle);
-      obstacles.push(obstacle);
+        let obstacle = document.createElement('img');
+        obstacle.src = 'path/to/obstacle/npc.avif';
+        obstacle.classList.add('obstacle');
+        obstacle.style.left = Math.random() * (gameContainer.offsetWidth - obstacle.offsetWidth) + 'px';
+        obstacle.style.top = '-50px';
+        gameContainer.appendChild(obstacle);
+        obstacles.push(obstacle);
     }
-  }
+}
 
 function spawnPowerUp() {
     if (Math.random() < 0.005) {
@@ -190,10 +190,10 @@ function gameOver() {
 
 function spawnPlayer() {
     player = document.createElement('img');
-    player.src = 'path/to/player/main.png';
+    player.src = '../game js/Pictures/main.png';
     player.classList.add('player');
     player.style.left = playerX + 'px';
     player.style.bottom = playerY + 'px';
     gameContainer.appendChild(player);
-  }
+}
 
