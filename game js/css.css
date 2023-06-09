@@ -13,6 +13,7 @@ html, body {
 	width: 50px;
 	height: 50px;
 	background-image: ("..");
+	background-image: url('Pictures/main2.webp');
 	background-size: contain;
 	position: absolute;
 	bottom: 0;
@@ -23,7 +24,7 @@ html, body {
 .obstacle {
 	width: 50px;
 	height: 50px;
-	background-image: url('https://i.imgur.com/cnA80cm.png');
+	background-image: url('Pictures/npc.avif');
 	background-size: contain;
 	position: absolute;
 	top: -50px;
