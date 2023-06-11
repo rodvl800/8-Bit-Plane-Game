@@ -150,7 +150,7 @@ function collision(a, b) {
 function spawnObstacle() {
     if (Math.random() < 0.02) {
         let obstacle = document.createElement('img');
-        obstacle.src = 'Pictures/enemy-unscreen.gif';
+        obstacle.src = 'Pictures/ps2.gif';
         obstacle.classList.add('obstacle');
         obstacle.style.left = Math.random() * (gameContainer.offsetWidth - obstacle.offsetWidth) + 'px';
         obstacle.style.top = '-50px';
