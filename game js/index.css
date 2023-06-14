@@ -1,6 +1,7 @@
 body {
-    background-color: wheat;
+	  overflow: hidden;
     font-family: Arial, sans-serif;
+    background-image: url('Pictures/MP8glav.png');
 }
 
 .container {
