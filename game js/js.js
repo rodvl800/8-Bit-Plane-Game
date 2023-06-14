@@ -7,9 +7,9 @@ let scoreDiv = document.getElementById('score');
 let playerX = 275;
 let playerY = 0;
 
-let playerSpeed = 10;
-let obstacleSpeed = 5;
-let powerUpSpeed = 5;
+let playerSpeed = 20;
+let obstacleSpeed = 10;
+let powerUpSpeed = 10;
 
 let obstacleSpawnInterval = 1500;
 let powerUpSpawnInterval = 5000;
