@@ -3,7 +3,6 @@ let gameContainer = document.getElementById('game-container');
 let obstaclesContainer = document.getElementById('obstacles-container');
 let powerUpsContainer = document.getElementById('power-ups-container');
 let scoreDiv = document.getElementById('score');
-let levelDiv = document.getElementById('level');
 
 let playerX = 275;
 let playerY = 0;
@@ -15,8 +14,6 @@ let powerUpSpeed = 5;
 let obstacleSpawnInterval = 1500;
 let powerUpSpawnInterval = 5000;
 let score = 0;
-let level = 1;
-let levelScoreThreshold = 10;
 
 let obstacles = [];
 let powerUps = [];
@@ -37,10 +34,8 @@ function resetGame() {
     playerX = 275;
     playerY = 0;
     score = 0;
-    level = 1;
 
     scoreDiv.textContent = 'Score: ' + score;
-    levelDiv.textContent = 'Level ' + level;
 
     while (obstacles.length > 0) {
         obstacles.pop().remove();
@@ -58,7 +53,6 @@ function runGame() {
     checkCollisions();
     spawnObstacle();
     spawnPowerUp();
-    increaseLevel();
 }
 
 function handleKeyPress(event) {
@@ -170,16 +164,6 @@ function spawnPowerUp() {
     }
 }
 
-function increaseLevel() {
-    if (score >= levelScoreThreshold) {
-        level++;
-        levelScoreThreshold += 10;
-        levelDiv.textContent = 'Level ' + level;
-        obstacleSpeed += 1;
-        powerUpSpeed += 1;
-        playerSpeed += 1;
-    }
-}
 
 function gameOver() {
     clearInterval(gameLoop);
