@@ -7,6 +7,8 @@ let scoreDiv = document.getElementById('score');
 let playerX = 275;
 let playerY = 0;
 
+let windowSize = window.innerWidth
+
 let playerSpeed = 20;
 let obstacleSpeed = 10;
 let powerUpSpeed = 10;
@@ -31,7 +33,7 @@ function startGame() {
 }
 
 function resetGame() {
-    playerX = 275;
+    playerX = windowSize/2;
     playerY = 0;
     score = 0;
 
@@ -59,12 +61,23 @@ function handleKeyPress(event) {
     if (event.code === 'ArrowLeft') {
         if (playerX > 0) {
             playerX -= playerSpeed;
-            player.style.left = playerX
+            player.style.left = playerX;
         }
     } else if (event.code === 'ArrowRight') {
         if (playerX < gameContainer.offsetWidth - player.offsetWidth) {
             playerX += playerSpeed;
             player.style.left = playerX + 'px';
+        }
+    }
+    else if (event.code === 'ArrowDown') {
+        if (playerY > 0) {
+            playerY -= playerSpeed;
+            //player.style.left = playerY;
+        }
+    } else if (event.code === 'ArrowUp') {
+        if (playerY < gameContainer.offsetHeight - player.offsetWidth) {
+            playerY += playerSpeed;
+            //player.style.left = playerY + 'px';
         }
     }
 }
@@ -165,12 +178,6 @@ function spawnPowerUp() {
 }
 
 
-function gameOver() {
-    clearInterval(gameLoop);
-    alert('Game Over!');
-    resetGame();
-    startGame();
-}
 
 function spawnPlayer() {
     player = document.createElement('img');
@@ -181,3 +188,30 @@ function spawnPlayer() {
     gameContainer.appendChild(player);
 }
 
+// Add your game logic here
+
+// When the game is over, show the game over screen
+function showGameOverScreen() {
+    var gameOverScreen = document.getElementById("gameOver");
+    var playAgainButton = document.getElementById("playAgain");
+  
+    gameOverScreen.style.display = "block";
+  
+    // Add an event listener to the play again button
+    playAgainButton.addEventListener("click", function() {
+      // Hide the game over screen
+      gameOverScreen.style.display = "none";
+  
+      // Reset your game logic and start a new game
+      resetGame();
+      startGame();
+    });
+  }
+  
+  // Call this function when your game is over
+  function gameOver() {
+    // Perform any necessary game over actions (e.g., stopping timers, updating high score)
+    clearInterval(gameLoop);
+    // Show the game over screen
+    showGameOverScreen();
+  }
