@@ -57,3 +57,6 @@ body{
 .author p{
   text-align: center;
 }
+.author h1{
+  margin-top: 0px;
+}

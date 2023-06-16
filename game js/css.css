@@ -12,7 +12,6 @@ html, body{
 }
 
 #player{
-	transition: left 0.3s ease, right 0.3s ease; /* Smooth transition for left and bottom properties */
 	width: 150px;
 	height: 150px;
 	background-image: url('Pictures/plane_preview-crop.png');
