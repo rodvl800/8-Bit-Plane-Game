@@ -7,20 +7,21 @@ let scoreDiv = document.getElementById('score');
 let playerX = 275;
 let playerY = 0;
 
-let windowSize = window.innerWidth
+let windowSize = window.innerWidth;
 
 let playerSpeed = 20;
 let obstacleSpeed = 10;
 let powerUpSpeed = 10;
 
-let obstacleSpawnInterval = 1500;
-let powerUpSpawnInterval = 5000;
+let obstacleSpawnInterval = 1000;
+let powerUpSpawnInterval = 3000;
 let score = 0;
 
 let obstacles = [];
 let powerUps = [];
 
 let gameLoop;
+let isGameOver = false;
 
 startGame();
 
@@ -36,6 +37,9 @@ function resetGame() {
     playerX = windowSize/2;
     playerY = 0;
     score = 0;
+    playerSpeed = 20;
+    obstacleSpeed = 10;
+    powerUpSpeed = 10;
 
     scoreDiv.textContent = 'Score: ' + score;
 
@@ -58,7 +62,10 @@ function runGame() {
 }
 
 function handleKeyPress(event) {
-    if (event.code === 'ArrowLeft') {
+    if (isGameOver) {
+        return;
+    }
+    else if (event.code === 'ArrowLeft') {
         if (playerX > 0) {
             playerX -= playerSpeed;
             player.style.left = playerX;
@@ -138,6 +145,9 @@ function checkCollisions() {
             i--;
             score += 2;
             scoreDiv.textContent = 'Score: ' + score;
+            playerSpeed +=5;
+            obstacleSpeed +=2;
+            powerUpSpeed +=2;
         }
     }
 }
@@ -177,8 +187,6 @@ function spawnPowerUp() {
     }
 }
 
-
-
 function spawnPlayer() {
     player = document.createElement('img');
     player.src = '../game js/Pictures/main.png';
@@ -192,8 +200,10 @@ function spawnPlayer() {
 
 // When the game is over, show the game over screen
 function showGameOverScreen() {
-    var gameOverScreen = document.getElementById("gameOver");
-    var playAgainButton = document.getElementById("playAgain");
+    let gameOverScreen = document.getElementById("gameOver");
+    let playAgainButton = document.getElementById("playAgain");
+    let goBackButton = document.getElementById("goBack");
+    isGameOver = true;
   
     gameOverScreen.style.display = "block";
   
@@ -201,10 +211,10 @@ function showGameOverScreen() {
     playAgainButton.addEventListener("click", function() {
       // Hide the game over screen
       gameOverScreen.style.display = "none";
-  
-      // Reset your game logic and start a new game
+      clearInterval(gameLoop);
       resetGame();
       startGame();
+      isGameOver = false;
     });
   }
   
