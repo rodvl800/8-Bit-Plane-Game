@@ -9,9 +9,13 @@ let playerY = 0;
 
 let windowSize = window.innerWidth;
 
-let playerSpeed = 20;
-let obstacleSpeed = 10;
-let powerUpSpeed = 10;
+let playerSpeedX = 5;
+let playerSpeedY = 5;
+let obstacleSpeed = 5;
+let powerUpSpeed = 5;
+
+let playerDirectionX = 0;
+let playerDirectionY = 0;
 
 let obstacleSpawnInterval = 1000;
 let powerUpSpawnInterval = 3000;
@@ -28,18 +32,20 @@ startGame();
 function startGame() {
     resetGame();
 
-    gameLoop = setInterval(runGame, 50);
+    gameLoop = setInterval(runGame, 16); // Run at approximately 60 frames per second (1000ms / 60fps ≈ 16.67ms)
 
     document.addEventListener('keydown', handleKeyPress);
+    document.addEventListener('keyup', handleKeyUp);
 }
 
 function resetGame() {
-    playerX = windowSize/2;
+    playerX = windowSize / 2;
     playerY = 0;
     score = 0;
-    playerSpeed = 20;
-    obstacleSpeed = 10;
-    powerUpSpeed = 10;
+    playerSpeedX = 5;
+    playerSpeedY = 5;
+    obstacleSpeed = 5;
+    powerUpSpeed = 5;
 
     scoreDiv.textContent = 'Score: ' + score;
 
@@ -62,34 +68,32 @@ function runGame() {
 }
 
 function handleKeyPress(event) {
-    if (isGameOver) {
-        return;
-    }
-    else if (event.code === 'ArrowLeft') {
-        if (playerX > 0) {
-            playerX -= playerSpeed;
-            player.style.left = playerX;
-        }
+    if (event.code === 'ArrowLeft') {
+        playerDirectionX = -1;
     } else if (event.code === 'ArrowRight') {
-        if (playerX < gameContainer.offsetWidth - player.offsetWidth) {
-            playerX += playerSpeed;
-            player.style.left = playerX + 'px';
-        }
-    }
-    else if (event.code === 'ArrowDown') {
-        if (playerY > 0) {
-            playerY -= playerSpeed;
-            //player.style.left = playerY;
-        }
+        playerDirectionX = 1;
+    } else if (event.code === 'ArrowDown') {
+        playerDirectionY = -1;
     } else if (event.code === 'ArrowUp') {
-        if (playerY < gameContainer.offsetHeight - player.offsetWidth) {
-            playerY += playerSpeed;
-            //player.style.left = playerY + 'px';
-        }
+        playerDirectionY = 1;
+    }
+}
+
+function handleKeyUp(event) {
+    if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
+        playerDirectionX = 0;
+    } else if (event.code === 'ArrowDown' || event.code === 'ArrowUp') {
+        playerDirectionY = 0;
     }
 }
 
 function movePlayer() {
+    playerX += playerSpeedX * playerDirectionX;
+    playerY += playerSpeedY * playerDirectionY;
+
+    playerX = Math.max(0, Math.min(playerX, gameContainer.offsetWidth - player.offsetWidth));
+    playerY = Math.max(0, Math.min(playerY, gameContainer.offsetHeight - player.offsetHeight));
+
     player.style.left = playerX + 'px';
     player.style.bottom = playerY + 'px';
 }
@@ -145,9 +149,10 @@ function checkCollisions() {
             i--;
             score += 2;
             scoreDiv.textContent = 'Score: ' + score;
-            playerSpeed +=5;
-            obstacleSpeed +=2;
-            powerUpSpeed +=2;
+            playerSpeedX += 2;
+            playerSpeedY += 2;
+            obstacleSpeed += 1;
+            powerUpSpeed += 1;
         }
     }
 }
@@ -167,7 +172,7 @@ function collision(a, b) {
 function spawnObstacle() {
     if (Math.random() < 0.02) {
         let obstacle = document.createElement('img');
-        obstacle.src = 'Pictures/ps2.gif';
+        obstacle.src = 'Pictures/ps3.png';
         obstacle.classList.add('obstacle');
         obstacle.style.left = Math.random() * (gameContainer.offsetWidth - obstacle.offsetWidth) + 'px';
         obstacle.style.top = '-50px';
@@ -204,24 +209,24 @@ function showGameOverScreen() {
     let playAgainButton = document.getElementById("playAgain");
     let goBackButton = document.getElementById("goBack");
     isGameOver = true;
-  
+
     gameOverScreen.style.display = "block";
-  
+
     // Add an event listener to the play again button
-    playAgainButton.addEventListener("click", function() {
-      // Hide the game over screen
-      gameOverScreen.style.display = "none";
-      clearInterval(gameLoop);
-      resetGame();
-      startGame();
-      isGameOver = false;
+    playAgainButton.addEventListener("click", function () {
+        // Hide the game over screen
+        gameOverScreen.style.display = "none";
+        clearInterval(gameLoop);
+        resetGame();
+        startGame();
+        isGameOver = false;
     });
-  }
-  
-  // Call this function when your game is over
-  function gameOver() {
+}
+
+// Call this function when your game is over
+function gameOver() {
     // Perform any necessary game over actions (e.g., stopping timers, updating high score)
     clearInterval(gameLoop);
     // Show the game over screen
     showGameOverScreen();
-  }
+}

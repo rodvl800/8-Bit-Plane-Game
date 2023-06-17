@@ -1,17 +1,18 @@
-html, body{
+html,
+body {
 	margin: 0;
 	height: 100%;
 	overflow: hidden;
 }
 
-#game-container{
+#game-container {
 	width: 100%;
 	height: 100%;
-	background-image: url('Pictures/MP8glav.png');
+	background-image: url('Pictures/Space.Art.Wallpaper.1920x1080_096.jpg');
 	position: relative;
 }
 
-#player{
+#player {
 	width: 150px;
 	height: 150px;
 	background-image: url('Pictures/plane_preview-crop.png');
@@ -20,7 +21,7 @@ html, body{
 	bottom: 0;
 }
 
-.obstacle{
+.obstacle {
 	width: 100px;
 	height: 100px;
 	background-image: url('Pictures/enemy-unscreen.gif');
@@ -29,7 +30,7 @@ html, body{
 	top: -50px;
 }
 
-.power-up{
+.power-up {
 	width: 75px;
 	height: 75px;
 	background-image: url('Pictures/star2.png');
@@ -38,7 +39,7 @@ html, body{
 	top: -50px;
 }
 
-#score{
+#score {
 	position: absolute;
 	color: aliceblue;
 	top: 10px;
@@ -46,7 +47,7 @@ html, body{
 	font-size: 40px;
 }
 
-#gameOver{
+#gameOver {
 	display: none;
 	position: absolute;
 	top: 50%;
@@ -55,13 +56,14 @@ html, body{
 	text-align: center;
 }
 
-#gameOver h1{
+#gameOver h1 {
 	font-size: 36px;
 	margin-bottom: 20px;
 	color: aliceblue;
 }
 
-#playAgain, #goBack{
+#playAgain,
+#goBack {
 	padding: 10px 20px;
 	font-size: 18px;
 }
