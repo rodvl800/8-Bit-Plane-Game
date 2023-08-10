@@ -78,7 +78,7 @@ function handleKeyPress(event) { //handle keypresses using event codes (https://
         playerDirectionY = 1;
     }
 }
-//drtrct which direction the player should move
+//detect which direction the player should move
 function handleKeyUp(event) {
     if (event.code === 'ArrowLeft' || event.code === 'ArrowRight') {
         playerDirectionX = 0;
@@ -142,7 +142,7 @@ function checkCollisions() {
         let powerUp = powerUps[i];
 
         if (collision(player, powerUp)) { //if you collect a powerup - increase speed 
-            powerUp.remove(); //and remove the pover from the screen bc is is collected
+            powerUp.remove(); //and remove the pover from the screen bc it is collected
             powerUps.splice(i, 1);
             i--;
             score += 2;
