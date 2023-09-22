@@ -17,17 +17,17 @@ function animateJet() {
     directionX = -directionX;
     jetIcon.style.transform = `scaleX(${directionX})`;
   }
-  //change direction if plane hits a border (x axis)
+  //change direction if plane hits a border (x-axis)
 
   if (posY <= 0 || posY >= containerHeight - jetIcon.offsetHeight) { //check of an icon is touching a border
     directionY = -directionY;
   }
-  //change direction if plane hits a border (y axis)
+  //change direction if plane hits a border (y-axis)
 
-  // Refresh new position usimg css
+  // Refresh new position using css
   jetIcon.style.left = `${posX}px`;
   jetIcon.style.top = `${posY}px`;
 
-  requestAnimationFrame(animateJet); //call the functin endlessly to animate jet (function calls itself)
+  requestAnimationFrame(animateJet); //call the function endlessly to animate jet (function calls itself)
 }
 animateJet(); //initiate the animation
